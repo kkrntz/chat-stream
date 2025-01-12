@@ -29,6 +29,6 @@
         {{ $users->links() }}
     </div>
     @if($isVisibleChatBox)
-        @livewire('chat-box', ['conversationId' => $currentConversationId])
+        @livewire('chat-box', ['conversationId' => $conversationId])
     @endif
 </div>

@@ -12,7 +12,7 @@ class UserTable extends Component
 {
     use WithPagination;
     public $isVisibleChatBox = false;
-    public $currentConversationId;
+    public $conversationId;
 
     public function toggleChatBox($userId)
     {
@@ -23,17 +23,18 @@ class UserTable extends Component
             'user2'=> $userId,
             'user1'=> auth()->user()->id
         ])-> first();
-        Log::info('me:'.auth()->user()->id);
-        Log::info('user id:'.$userId);
+        // Log::info('me:'.auth()->user()->id);
+        // Log::info('user id:'.$userId);
         if(!($conversation)) {
-            $currentConversationId = Conversation::create([
+            $this->conversationId = Conversation::create([
                 "user1"=>auth()->user()->id,
                 "user2"=>$userId
             ])->id;
         } else {
-            $currentConversationId = $conversation->id;
+            $this->conversationId = $conversation->id;
         }
-        Log::info('conversation id:'.$currentConversationId);
+        Log::info('conversation id:'.$this->conversationId);
+        // session()->put('conversationId', $this->$conversationId);
         $this->isVisibleChatBox = true;
     }
 

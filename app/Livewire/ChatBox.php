@@ -21,9 +21,9 @@ class ChatBox extends Component
     public function mount($conversationId)
     {
         // $this->conversation = Conversation::find($this->conversationId);
-        $this->conversationId = $conversationId;
+        $this->conversationId = session()->get('conversationId');
         $this->user = auth()->user();
-        Log::info('currentConvId:'.$conversationId);
+        Log::info('render currentConvId:'.$this->conversationId);
         $this->loadMessages();
     }
 
@@ -60,6 +60,11 @@ class ChatBox extends Component
 
     public function render()
     {
+        // if (is_null($this->conversationId)) {
+        //     Log::info('render currentConvId: is null');
+        // } else {
+        //     Log::info('render currentConvId:'.$this->$conversationId);
+        // }
         return view('livewire.chat-box');
     }
 }
